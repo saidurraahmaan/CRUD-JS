@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <title></title>
+  </head>
+  <body>
+    <div>
+      <!--Form start-->
+      <form>
+        <div>
+          <label>Enter your name:</label>
+          <input type="text" id="fullName" />
+        </div>
+        
+        <div>
+          <label>Enter your age:</label>
+          <input type="number" id="age" min="18" max="60" />
+        </div>
+        <div>
+          <button id="submit-btn" disabled>Submit</button>
+        </div>
+      </form>
+      <!--Form end-->
+      
+
+      <div id="show" class="hidden">
+        <!--Showing information in table-->
+        <table id="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th colspan="3">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="user-rows-body" ></tbody>
+        </table>
+        <!--Table end-->
+        <div id="selected-user">
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
