@@ -3,8 +3,12 @@ const age = document.querySelector("#age");
 const form = document.querySelector("form");
 const submitBtn = document.querySelector("#submit-btn");
 const tbody = document.querySelector("#table tbody");
-const selectedUserShow = document.querySelector("#show #selected-user");
+const selectedUserShow = document.querySelector(
+  ".table-wrapper #selected-user"
+);
+const tableWrapper = document.querySelector("#table-wrapper");
 
+let users = [];
 let count = 1;
 let submitAction = "add";
 let userSerial = -1;
@@ -13,11 +17,42 @@ form.addEventListener("submit", submitForm);
 name.addEventListener("change", buttonEnable);
 age.addEventListener("change", buttonEnable);
 
+function initialize() {
+  users = JSON.parse(window.localStorage.getItem("users")) || [];
+
+  users.forEach((user) => {
+    console.log(user.id);
+    const tr = document.createElement("tr");
+    const userId = user.id;
+    tr.id = `user-${userId}`;
+    tr.innerHTML = `
+          <td>${user.name} </td>
+          <td>${user.age}</td>
+          <td>
+          <button class="select-btn" id="select-${userId}">Select</button>
+          <button class="update-btn" id="update-${userId}">Update</button>
+          <button class="delete-btn" id="delete-${userId}">Delete</button>
+          </td>
+        `;
+    tbody.appendChild(tr);
+  });
+
+  checkTbodyChildren();
+}
+
 function buttonEnable() {
   if (name.value !== "" && age.value !== "") {
     submitBtn.disabled = false;
   } else {
     submitBtn.disabled = true;
+  }
+}
+
+function checkTbodyChildren() {
+  if (tbody.childElementCount > 0) {
+    tableWrapper.classList.remove("hidden");
+  } else {
+    tableWrapper.classList.add("hidden");
   }
 }
 
@@ -56,12 +91,12 @@ function addUser() {
   console.log(submitAction);
   clearSelectedUser();
 
-  const person = { name: name.value, age: age.value };
+  const user = { id: count, name: name.value, age: age.value };
   const tr = document.createElement("tr");
   tr.id = `user-${count}`;
   tr.innerHTML = `
-          <td>${person.name} </td>
-          <td>${person.age}</td>
+          <td>${user.name} </td>
+          <td>${user.age}</td>
           <td>
           <button class="select-btn" id="select-${count}">Select</button>
           <button class="update-btn" id="update-${count}">Update</button>
@@ -79,16 +114,16 @@ function addUser() {
   const updateBtn = document.querySelector(`#update-${count}`);
   updateBtn.addEventListener("click", setUpdateForm);
 
+  users.push(user);
+
+  window.localStorage.setItem("users", JSON.stringify(users));
+
   ++count;
 
   form.reset();
   submitBtn.disabled = true;
 
-  if (tbody.childElementCount > 0) {
-    document.getElementById("show").style.display = "block";
-  } else {
-    document.getElementById("show").style.display = "none";
-  }
+  checkTbodyChildren();
 }
 
 function setUpdateForm(e) {
@@ -140,3 +175,5 @@ function deleteUser(e) {
     document.getElementById("show").style.display = "none";
   }
 }
+
+initialize();
