@@ -1,17 +1,16 @@
-.hidden{
-    display: none;
-
+.hidden {
+  display: none;
 }
-.table{
-    border: 2px solid;
-    padding: 5px;
-    margin: 5px;
+.table {
+  border: 2px solid;
+  padding: 5px;
+  margin: 5px;
 }
-th{
-    border: 2px solid;
-    padding:5px;
+th {
+  border: 2px solid;
+  padding: 5px;
 }
-td{
-    border: 2px solid;
-    padding:5px;
+td {
+  border: 2px solid;
+  padding: 5px;
 }
