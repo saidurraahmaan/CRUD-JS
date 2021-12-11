@@ -14,8 +14,8 @@ let submitAction = "add";
 let userSerial = -1;
 
 form.addEventListener("submit", submitForm);
-name.addEventListener("change", buttonEnable);
-age.addEventListener("change", buttonEnable);
+name.addEventListener("keyup", buttonEnable);
+age.addEventListener("keyup", buttonEnable);
 
 function initialize() {
   users = JSON.parse(window.localStorage.getItem("users")) || [];
@@ -41,6 +41,9 @@ function initialize() {
 }
 
 function buttonEnable() {
+  console.log("Name: ", name.value);
+  console.log("Age: ", age.value);
+
   if (name.value !== "" && age.value !== "") {
     submitBtn.disabled = false;
   } else {
