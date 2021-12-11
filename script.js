@@ -63,9 +63,9 @@ function addUser() {
           <td>${person.name} </td>
           <td>${person.age}</td>
           <td>
-          <button id="select-${count}">Select</button>
-          <button id="update-${count}">Update</button>
-          <button id="delete-${count}">Delete</button>
+          <button class="select-btn" id="select-${count}">Select</button>
+          <button class="update-btn" id="update-${count}">Update</button>
+          <button class="delete-btn" id="delete-${count}">Delete</button>
           </td>
         `;
   tbody.appendChild(tr);
